@@ -1,0 +1,51 @@
+table users {
+  id INT [pk, increment]
+}
+
+table shopping_list {
+  id INT [pk, increment]
+  user_id INT
+}
+
+table products {
+  id INT [pk, increment]
+  name VARCHAR(100)
+  price DECIMAL(5,2)
+}
+
+table companies {
+  company_id INT [pk, increment]
+
+}
+
+table stores {
+  id INT [pk, increment]
+  company_id INT 
+  location_id INT
+}
+
+table locations {
+  id INT [pk, increment]
+  municipality VARCHAR(50)
+  city VARCHAR(50)
+
+}
+
+table inventory {
+  id INT [pk, increment]
+  product_id INT
+  availability BOOLEAN 
+}
+
+
+Ref: "shopping_list"."id" < "products"."id"
+
+Ref: "products"."id" <> "stores"."id"
+
+Ref: "inventory"."id" < "stores"."id"
+
+Ref: "users"."id" < "shopping_list"."user_id"
+
+Ref: "companies"."company_id" < "stores"."company_id"
+
+Ref: "stores"."location_id" - "locations"."id"
