@@ -40,3 +40,6 @@
     It will be used as a filter method to show the stores where the product is available once the user searches for it.
   </li>
 </ul>
+
+<img src="DB_DIAGRAM_2.png">
+<img src="DB_SCHEMA.png">
