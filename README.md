@@ -1,6 +1,6 @@
 # Supermarkt
 
-App description:
+<h3>App description:</h3>
 
 The application was designed to show the prices of a desired product, giving the opportunity to order them by price and/or location and to add them to a shopping list. The purpose of the shopping list is to provide a better user experience by sorting the desired products by store. So, the user can save time and money knowing where to buy the articles which will be listed by store.
 
@@ -8,17 +8,17 @@ User opens the app.
 User makes a search for a product.
 The app throws a result with available products by price, store and location.
 User can add products to the shopping cart and will be grouped by store.
-
+<ul>
 Entities
+  <li>users</li>
 
-users
 cart
 products
 companies
 stores
 locations
 inventory
-
+</ul>
 Relationships
 
 One user can only have one cart (one to one).
