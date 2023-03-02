@@ -1,6 +1,5 @@
 # Supermarkt
 
-<h2>Supermarkt</h2>
 <h3>App description:</h3>
 <p>
   The application was designed to show the prices of a desired product, giving the opportunity to order them by price
@@ -8,7 +7,6 @@
   experience by sorting the desired products by store. So, the user can save time and money knowing where to buy the
   articles which will be listed by store.
 </p>
-<hr>
 <h3>How it works:</h3>
 <p>
   User opens the app. User makes a search for a product. The app throws a result with available products by price,
@@ -25,7 +23,6 @@
   <li>locations</li>
   <li>inventory</li>
 </ul>
-<hr>
 <h3>
   Relationships
 </h3>
