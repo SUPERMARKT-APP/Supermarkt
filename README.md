@@ -14,7 +14,7 @@
 </p>
 
 <h2>Database Design</h2>
-<hr>
+
 <h3>Entities</h3>
 <ul>
   <li>users</li>
