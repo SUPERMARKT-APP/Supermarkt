@@ -12,6 +12,8 @@
   User opens the app. User makes a search for a product. The app throws a result with available products by price,
   store and location. User can add products to the shopping cart and will be grouped by store.
 </p>
+
+<h2>Database Design</h2>
 <hr>
 <h3>Entities</h3>
 <ul>
