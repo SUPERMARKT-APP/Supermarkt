@@ -1,62 +1,94 @@
-CREATE TABLE `users` (
-  `id` INT PRIMARY KEY AUTO_INCREMENT,
-  `name` VARCHAR(50)
-);
+  CREATE TABLE `users` (
+    `id` INT PRIMARY KEY AUTO_INCREMENT,
+    `name` VARCHAR(50)
+  );
 
-CREATE TABLE `shopping_list` (
-  `id` INT PRIMARY KEY AUTO_INCREMENT,
-  `user_id` INT
-);
+  CREATE TABLE `shopping_list` (
+    `id` INT PRIMARY KEY AUTO_INCREMENT,
+    `user_id` INT
+  );
 
-CREATE TABLE `products` (
-  `id` INT PRIMARY KEY AUTO_INCREMENT,
-  `shopping_list_id` INT,
-  `name` VARCHAR(100)
-);
+  CREATE TABLE `products` (
+    `id` INT PRIMARY KEY AUTO_INCREMENT,
+    `shopping_list_id` INT,
+    `name` VARCHAR(100)
+  );
 
-CREATE TABLE `companies` (
-  `company_id` INT PRIMARY KEY AUTO_INCREMENT,
-  `company_name` VARCHAR(50)
-);
-
-CREATE TABLE `stores` (
-  `id` INT PRIMARY KEY AUTO_INCREMENT,
-  `store_name` VARCHAR(50),
-  `company_id` INT,
-  `location_id` INT UNIQUE
-);
-
-CREATE TABLE `locations` (
-  `id` INT PRIMARY KEY AUTO_INCREMENT,
-  `municipality` VARCHAR(50),
-  `city` VARCHAR(50)
-);
-
-CREATE TABLE `products_stores` (
-  `products_id` INT,
-  `stores_id` INT,
-  PRIMARY KEY (`products_id`, `stores_id`)
-);
-
-ALTER TABLE `products_stores` ADD FOREIGN KEY (`products_id`) REFERENCES `products` (`id`);
-
-ALTER TABLE `products_stores` ADD FOREIGN KEY (`stores_id`) REFERENCES `stores` (`id`);
+  CREATE TABLE `companies` (
+    `id` INT PRIMARY KEY AUTO_INCREMENT,
+    `company_name` VARCHAR(50),
+    `location_id` INT UNIQUE
+  );
 
 
-ALTER TABLE `shopping_list` ADD FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
+  CREATE TABLE `locations` (
+    `id` INT PRIMARY KEY AUTO_INCREMENT,
+    `municipality` VARCHAR(50),
+    `city` VARCHAR(50),
+    `address` VARCHAR(150)
+  );
 
-ALTER TABLE `stores` ADD FOREIGN KEY (`company_id`) REFERENCES `companies` (`company_id`);
 
-ALTER TABLE `locations` ADD FOREIGN KEY (`id`) REFERENCES `stores` (`location_id`);
 
-ALTER TABLE `products` ADD FOREIGN KEY (`shopping_list_id`) REFERENCES `shopping_list` (`id`);
 
-CREATE TABLE `companies_products` (
-  `companies_company_id` INT,
-  `products_id` INT,
-  PRIMARY KEY (`companies_company_id`, `products_id`)
-);
+  ALTER TABLE `shopping_list` ADD FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
 
-ALTER TABLE `companies_products` ADD FOREIGN KEY (`companies_company_id`) REFERENCES `companies` (`company_id`);
+  ALTER TABLE `companies` ADD FOREIGN KEY (`location_id`) REFERENCES `locations` (`id`);
 
-ALTER TABLE `companies_products` ADD FOREIGN KEY (`products_id`) REFERENCES `products` (`id`);
+  ALTER TABLE `products` ADD FOREIGN KEY (`shopping_list_id`) REFERENCES `shopping_list` (`id`);
+
+  CREATE TABLE `companies_products` (
+    `companies_id` INT,
+    `products_id` INT,
+    PRIMARY KEY (`companies_id`, `products_id`),
+    `product_price` DECIMAL(5,2),
+    `availability` BOOLEAN
+  );
+
+  ALTER TABLE `companies_products` ADD FOREIGN KEY (`companies_id`) REFERENCES `companies` (`id`);
+
+  ALTER TABLE `companies_products` ADD FOREIGN KEY (`products_id`) REFERENCES `products` (`id`);
+
+  INSERT INTO users (name) 
+  VALUES 
+  ('Tino'), 
+  ('Javi'), 
+  ('Airam');
+
+
+  INSERT INTO products (name)
+  VALUES 
+  ('Red apple'), 
+  ('Tomato'),
+  ('Milk'),
+  ('Lanjaron Water');
+
+
+
+
+  INSERT INTO locations (municipality, city, address)
+  VALUES
+  ('Las Palmas de Gran Canaria', 'Las Palmas GC', 'Calle tenerife, 1'),
+  ('Las Palmas de Gran Canaria', 'Las Palmas GC', 'El Sebadal, 42'),
+  ('Las Palmas de Gran Canaria', 'Las Palmas GC', 'Hoya La Playa'),
+  ('Las Palmas de Gran Canaria', 'Las Palmas GC', 'Calle Triana, 1'),
+  ('Telde', 'Telde', 'Polígono industrial Jinamar');
+  
+
+  INSERT INTO companies (company_name, location_id)
+  VALUES
+  ('Hiperdino Las Canteras', 1),
+  ('Mercadona', 2),
+  ('Carrefour', 3),
+  ('Hiperdino Triana', 4),
+  ('Lidl', 5);
+  
+  INSERT INTO companies_products (products_id, companies_id, product_price, availability) 
+  VALUES
+  (3,1, 2.99, true),
+  (3,2, 2.15, true),
+  (3,4, 3.15, true),
+  (3,5, 2.00, false),
+  (1,1, 0.99, true),
+  (1,2, 1.15, false),
+  (1,3, 1.80, true);
