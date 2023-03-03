@@ -5,13 +5,19 @@ CREATE TABLE `users` (
 
 CREATE TABLE `products` (
   `id` INT PRIMARY KEY AUTO_INCREMENT,
-  `shopping_list_id` INT,
   `name` VARCHAR(100)
 );
 
 CREATE TABLE `companies` (
   `id` INT PRIMARY KEY AUTO_INCREMENT,
   `company_name` VARCHAR(50),
+  `location_id` INT UNIQUE
+);
+
+CREATE TABLE `stores` (
+  `id` INT PRIMARY KEY AUTO_INCREMENT,
+  `store_name` VARCHAR(50),
+  `company_id` INT,
   `location_id` INT UNIQUE
 );
 
@@ -22,83 +28,62 @@ CREATE TABLE `locations` (
   `address` VARCHAR(150)
 );
 
-CREATE TABLE `companies_products` (
-  `id` INT PRIMARY KEY AUTO_INCREMENT,
-  `companies_id` INT,
-  `products_id` INT,
-  `product_price` DECIMAL(5,2),
-  `availability` BOOLEAN
-);
-
 CREATE TABLE `users_products` (
   `users_id` INT,
   `products_id` INT,
   PRIMARY KEY (`users_id`, `products_id`)
 );
 
-ALTER TABLE `companies` ADD FOREIGN KEY (`location_id`) REFERENCES `locations` (`id`);
-
-ALTER TABLE `companies_products` ADD FOREIGN KEY (`companies_id`) REFERENCES `companies` (`id`);
-
-ALTER TABLE `companies_products` ADD FOREIGN KEY (`products_id`) REFERENCES `products` (`id`);
-
+CREATE TABLE `products_stores` (
+  `products_id` INT,
+  `stores_id` INT,
+  PRIMARY KEY (`products_id`, `stores_id`),
+  `product_price` DECIMAL(5,2)
+);
 
 ALTER TABLE `users_products` ADD FOREIGN KEY (`users_id`) REFERENCES `users` (`id`);
 
-ALTER TABLE `users_products` ADD FOREIGN KEY (`products_id`) REFERENCES `companies_products` (`id`);
+ALTER TABLE `stores` ADD FOREIGN KEY (`company_id`) REFERENCES `companies` (`id`);
 
+ALTER TABLE `stores` ADD FOREIGN KEY (`location_id`) REFERENCES `locations` (`id`);
 
-  INSERT INTO users (name) 
-  VALUES 
-  ('Tino'), 
-  ('Javi'), 
-  ('Airam');
+ALTER TABLE `products_stores` ADD FOREIGN KEY (`products_id`) REFERENCES `products` (`id`);
 
+ALTER TABLE `products_stores` ADD FOREIGN KEY (`stores_id`) REFERENCES `stores` (`id`);
 
-  INSERT INTO products (name)
-  VALUES 
-  ('Red apple'), 
-  ('Tomato'),
-  ('Milk'),
-  ('Lanjaron Water');
+ALTER TABLE `users_products` ADD FOREIGN KEY (`products_id`) REFERENCES `products` (`id`);
 
+INSERT INTO users (name)
+VALUES ('Airam');
 
+INSERT INTO products (name)
+VALUES('Leche ENTERA'),
+('Piña en lata'),
+('Agua lanjarón'),
+('Manzana roja');
 
+INSERT INTO locations (municipality,city,address)
+VALUES
+('Las Palmas de Gran Canaria', 'Las Palmas GC', 'Calle Tenerife 1, Las Canteras'),
+('Las Palmas de Gran Canaria', 'Las Palmas GC', 'CC Las Arenas');
 
-  INSERT INTO locations (municipality, city, address)
-  VALUES
-  ('Las Palmas de Gran Canaria', 'Las Palmas GC', 'Calle tenerife, 1'),
-  ('Las Palmas de Gran Canaria', 'Las Palmas GC', 'El Sebadal, 42'),
-  ('Las Palmas de Gran Canaria', 'Las Palmas GC', 'Hoya La Playa'),
-  ('Las Palmas de Gran Canaria', 'Las Palmas GC', 'Calle Triana, 1'),
-  ('Telde', 'Telde', 'Polígono industrial Jinamar');
-  
+INSERT INTO companies (company_name, location_id)
+VALUES
+('Hiperdino', 1),
+('Carrefour', 2);
 
-  INSERT INTO companies (company_name, location_id)
-  VALUES
-  ('Hiperdino Las Canteras', 1),
-  ('Mercadona', 2),
-  ('Carrefour', 3),
-  ('Hiperdino Triana', 4),
-  ('Lidl', 5);
-  
-  INSERT INTO companies_products (products_id, companies_id, product_price, availability) 
-  VALUES
-  (3,1, 2.99, true),
-  (3,2, 2.15, true),
-  (3,4, 3.15, true),
-  (3,5, 2.00, false),
-  (1,1, 0.99, true),
-  (1,2, 1.15, false),
-  (1,3, 1.80, true);
-  
-  INSERT INTO users_products (users_id, products_id)
-  VALUES
-  (1,1),
-  (1,2),
-  (1,3),
-  (2,3),
-  (2,1),
-  (3,2);
-  
-  
+INSERT INTO stores (store_name, company_id, location_id)
+VALUES
+('Hiperdino Las Canteras', 1, 1),
+('Carrefour Las Arenas', 2, 2);
+
+INSERT INTO products_stores (products_id, stores_id, product_price)
+VALUES
+(1,1, 1.5),
+(2,1, 1.95),
+(3,1, 0.90),
+(4,1, 0.55),
+(1,2, 2.00),
+(2,2, 2.50),
+(3,2, 0.75),
+(4,2, 0.49);
