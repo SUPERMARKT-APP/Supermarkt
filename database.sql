@@ -1,53 +1,51 @@
-  CREATE TABLE `users` (
-    `id` INT PRIMARY KEY AUTO_INCREMENT,
-    `name` VARCHAR(50)
-  );
+CREATE TABLE `users` (
+  `id` INT PRIMARY KEY AUTO_INCREMENT,
+  `name` VARCHAR(50)
+);
 
-  CREATE TABLE `shopping_list` (
-    `id` INT PRIMARY KEY AUTO_INCREMENT,
-    `user_id` INT
-  );
+CREATE TABLE `products` (
+  `id` INT PRIMARY KEY AUTO_INCREMENT,
+  `shopping_list_id` INT,
+  `name` VARCHAR(100)
+);
 
-  CREATE TABLE `products` (
-    `id` INT PRIMARY KEY AUTO_INCREMENT,
-    `shopping_list_id` INT,
-    `name` VARCHAR(100)
-  );
+CREATE TABLE `companies` (
+  `id` INT PRIMARY KEY AUTO_INCREMENT,
+  `company_name` VARCHAR(50),
+  `location_id` INT UNIQUE
+);
 
-  CREATE TABLE `companies` (
-    `id` INT PRIMARY KEY AUTO_INCREMENT,
-    `company_name` VARCHAR(50),
-    `location_id` INT UNIQUE
-  );
+CREATE TABLE `locations` (
+  `id` INT PRIMARY KEY AUTO_INCREMENT,
+  `municipality` VARCHAR(50),
+  `city` VARCHAR(50),
+  `address` VARCHAR(150)
+);
 
+CREATE TABLE `companies_products` (
+  `companies_id` INT,
+  `products_id` INT,
+  `product_price` DECIMAL(5,2),
+  `availability` BOOLEAN,
+  PRIMARY KEY (`companies_id`, `products_id`)
+);
 
-  CREATE TABLE `locations` (
-    `id` INT PRIMARY KEY AUTO_INCREMENT,
-    `municipality` VARCHAR(50),
-    `city` VARCHAR(50),
-    `address` VARCHAR(150)
-  );
+ALTER TABLE `companies` ADD FOREIGN KEY (`location_id`) REFERENCES `locations` (`id`);
 
+ALTER TABLE `companies_products` ADD FOREIGN KEY (`companies_id`) REFERENCES `companies` (`id`);
 
+ALTER TABLE `companies_products` ADD FOREIGN KEY (`products_id`) REFERENCES `products` (`id`);
 
+CREATE TABLE `users_products` (
+  `users_id` INT,
+  `products_id` INT,
+  PRIMARY KEY (`users_id`, `products_id`)
+);
 
-  ALTER TABLE `shopping_list` ADD FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
+ALTER TABLE `users_products` ADD FOREIGN KEY (`users_id`) REFERENCES `users` (`id`);
 
-  ALTER TABLE `companies` ADD FOREIGN KEY (`location_id`) REFERENCES `locations` (`id`);
+ALTER TABLE `users_products` ADD FOREIGN KEY (`products_id`) REFERENCES `products` (`id`);
 
-  ALTER TABLE `products` ADD FOREIGN KEY (`shopping_list_id`) REFERENCES `shopping_list` (`id`);
-
-  CREATE TABLE `companies_products` (
-    `companies_id` INT,
-    `products_id` INT,
-    PRIMARY KEY (`companies_id`, `products_id`),
-    `product_price` DECIMAL(5,2),
-    `availability` BOOLEAN
-  );
-
-  ALTER TABLE `companies_products` ADD FOREIGN KEY (`companies_id`) REFERENCES `companies` (`id`);
-
-  ALTER TABLE `companies_products` ADD FOREIGN KEY (`products_id`) REFERENCES `products` (`id`);
 
   INSERT INTO users (name) 
   VALUES 
