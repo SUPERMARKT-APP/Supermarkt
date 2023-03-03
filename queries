@@ -8,3 +8,7 @@ ON companies.location_id = locations.id
 WHERE products.name LIKE '%apple%'
 AND companies_products.availability = true
 ORDER BY companies_products.product_price;
+
+SELECT * FROM users
+INNER JOIN users_products
+ON users.id = users_products.users_id;

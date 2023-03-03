@@ -90,3 +90,15 @@ ALTER TABLE `users_products` ADD FOREIGN KEY (`products_id`) REFERENCES `product
   (1,1, 0.99, true),
   (1,2, 1.15, false),
   (1,3, 1.80, true);
+  
+  INSERT INTO users_products (users_id, products_id)
+  VALUES
+  (1,1),
+  (1,2),
+  (1,3),
+  (2,3),
+  (2,1),
+  (3,2);
+  
+  
+  
