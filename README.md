@@ -47,4 +47,4 @@
   </li>
 </ul>
 
-<img src="DB_DIAGRAM.png">
+<img src="DB_Schema.png">
