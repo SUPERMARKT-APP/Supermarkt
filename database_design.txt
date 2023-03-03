@@ -1,4 +1,4 @@
-table users {
+database_designtable users {
   id INT [pk, increment]
 }
 
