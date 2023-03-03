@@ -23,11 +23,17 @@ CREATE TABLE `locations` (
 );
 
 CREATE TABLE `companies_products` (
+  `id` INT PRIMARY KEY AUTO_INCREMENT,
   `companies_id` INT,
   `products_id` INT,
   `product_price` DECIMAL(5,2),
-  `availability` BOOLEAN,
-  PRIMARY KEY (`companies_id`, `products_id`)
+  `availability` BOOLEAN
+);
+
+CREATE TABLE `users_products` (
+  `users_id` INT,
+  `products_id` INT,
+  PRIMARY KEY (`users_id`, `products_id`)
 );
 
 ALTER TABLE `companies` ADD FOREIGN KEY (`location_id`) REFERENCES `locations` (`id`);
@@ -36,15 +42,10 @@ ALTER TABLE `companies_products` ADD FOREIGN KEY (`companies_id`) REFERENCES `co
 
 ALTER TABLE `companies_products` ADD FOREIGN KEY (`products_id`) REFERENCES `products` (`id`);
 
-CREATE TABLE `users_products` (
-  `users_id` INT,
-  `products_id` INT,
-  PRIMARY KEY (`users_id`, `products_id`)
-);
 
 ALTER TABLE `users_products` ADD FOREIGN KEY (`users_id`) REFERENCES `users` (`id`);
 
-ALTER TABLE `users_products` ADD FOREIGN KEY (`products_id`) REFERENCES `products` (`id`);
+ALTER TABLE `users_products` ADD FOREIGN KEY (`products_id`) REFERENCES `companies_products` (`id`);
 
 
   INSERT INTO users (name) 
@@ -99,6 +100,5 @@ ALTER TABLE `users_products` ADD FOREIGN KEY (`products_id`) REFERENCES `product
   (2,3),
   (2,1),
   (3,2);
-  
   
   
