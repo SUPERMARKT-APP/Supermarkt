@@ -1,9 +1,11 @@
 # Supermarkt
-<h3>Problem:</h3>
+<h3>Problem</h3>
 
 <p>Due to the current economic crisis, the living cost has increased significantly. Some part of the population is affected by this and there is a rising need of getting the lowest price of the groceries in order to afford the living expenses.</p>
 <p>At the moment, the user would have to go to every shop to get the price of the products of the shopping list. Once the user has all of the prices of all of the stores,  he/she has to filter by price and organise the list by shops. It is then when the user is ready to go back to the stores to buy the chosen items with lowest price.</p>
 <p>So logistically speaking, this way to proceed is not feasible as it would imply huge losses of time and money in petrol or travel tickets. </p>
+
+<h3>Solution</h3>
 <p>The approach to solve this issue is to provide a way for the user to check the price of a particular item in comparison with the nearby stores without having to leave their houses. </p>
 
 <h3>App description:</h3>
