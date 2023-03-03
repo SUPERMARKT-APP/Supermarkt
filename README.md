@@ -26,24 +26,21 @@
 <h3>Entities</h3>
 <ul>
   <li>users</li>
-  <li>cart</li>
+  <li>users_products</li>
   <li>products</li>
+  <li>companies_products</li>
   <li>companies</li>
-  <li>stores</li>
   <li>locations</li>
-  <li>inventory</li>
 </ul>
 <h3>
   Relationships
 </h3>
 <ul>
-  <li>One user can only have one cart (one to one).</li>
-  <li>A cart can have many products (one to many).</li>
+  <li>One user can only have one shopping list (one to one).</li>
+  <li>A shopping list can have many products (one to many).</li>
   <li>Products can be sold in many stores and stores can sell many products (many to many).</li>
-  <li>Companies can have many stores but a store can only belong to one company (one to many).</li>
-  <li>A store can have only one location and a location can have only one store (one to one).</li>
-  <li>An inventory represents the availability (true or false) of the products in a store.
-    It will be used as a filter method to show the stores where the product is available once the user searches for it.
+  <li>A company will have only one location. (one to one).</li>
+  <li>Product availability (true or false) will be used as a filter method to show the stores where the product is available once the user searches for it.
   </li>
 </ul>
 
