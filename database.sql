@@ -5,7 +5,7 @@ CREATE TABLE `users` (
 
 CREATE TABLE `products` (
   `id` INT PRIMARY KEY AUTO_INCREMENT,
-  `shopping_list_id` INT,
+
   `name` VARCHAR(100)
 );
 
@@ -33,6 +33,7 @@ CREATE TABLE `companies_products` (
 CREATE TABLE `users_products` (
   `users_id` INT,
   `products_id` INT,
+  `shopping_list_id` INT,
   PRIMARY KEY (`users_id`, `products_id`)
 );
 
@@ -92,13 +93,13 @@ ALTER TABLE `users_products` ADD FOREIGN KEY (`products_id`) REFERENCES `compani
   (1,2, 1.15, false),
   (1,3, 1.80, true);
   
-  INSERT INTO users_products (users_id, products_id)
+  INSERT INTO users_products (users_id, products_id,shopping_list_id )
   VALUES
-  (1,1),
-  (1,2),
-  (1,3),
-  (2,3),
-  (2,1),
-  (3,2);
+  (1,1,1),
+  (1,2,1),
+  (1,3,1),
+  (2,3,2),
+  (2,1,2),
+  (3,2,3);
   
   
