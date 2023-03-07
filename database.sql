@@ -27,15 +27,10 @@ CREATE TABLE `companies_products` (
   `companies_id` INT,
   `products_id` INT,
   `product_price` DECIMAL(5,2),
-  `availability` BOOLEAN
+  `availability` BOOLEAN,
+  `user_id` INT
 );
 
-CREATE TABLE `users_products` (
-  `users_id` INT,
-  `products_id` INT,
-  `shopping_list_id` INT,
-  PRIMARY KEY (`users_id`, `products_id`)
-);
 
 ALTER TABLE `companies` ADD FOREIGN KEY (`location_id`) REFERENCES `locations` (`id`);
 
@@ -43,10 +38,7 @@ ALTER TABLE `companies_products` ADD FOREIGN KEY (`companies_id`) REFERENCES `co
 
 ALTER TABLE `companies_products` ADD FOREIGN KEY (`products_id`) REFERENCES `products` (`id`);
 
-
-ALTER TABLE `users_products` ADD FOREIGN KEY (`users_id`) REFERENCES `users` (`id`);
-
-ALTER TABLE `users_products` ADD FOREIGN KEY (`products_id`) REFERENCES `companies_products` (`id`);
+ALTER TABLE `companies_products` ADD FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
 
 
   INSERT INTO users (name) 
@@ -83,23 +75,16 @@ ALTER TABLE `users_products` ADD FOREIGN KEY (`products_id`) REFERENCES `compani
   ('Hiperdino Triana', 4),
   ('Lidl', 5);
   
-  INSERT INTO companies_products (products_id, companies_id, product_price, availability) 
+  INSERT INTO companies_products (products_id, companies_id, product_price, availability,user_id) 
   VALUES
-  (3,1, 2.99, true),
-  (3,2, 2.15, true),
-  (3,4, 3.15, true),
-  (3,5, 2.00, false),
-  (1,1, 0.99, true),
-  (1,2, 1.15, false),
-  (1,3, 1.80, true);
+  (3,1, 2.99, true, 1),
+  (3,2, 2.15, true,2),
+  (2,4, 3.15, true,3),
+  (2,5, 2.00, false,1),
+  (1,1, 0.99, true,2),
+  (1,2, 1.15, false,1 ),
+  (1,3, 1.80, true,3);
   
-  INSERT INTO users_products (users_id, products_id,shopping_list_id )
-  VALUES
-  (1,1,1),
-  (1,2,1),
-  (1,3,1),
-  (2,3,2),
-  (2,1,2),
-  (3,2,3);
+
   
   
