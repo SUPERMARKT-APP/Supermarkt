@@ -1,20 +1,11 @@
-SELECT * FROM products_stores
-INNER JOIN stores
-ON products_stores.stores_id = stores.id
-INNER JOIN companies
-ON stores.company_id = companies.id
-INNER JOIN locations
-ON stores.location_id = locations.id
+SELECT users.name, products.name, products_stores.product_price, stores.store_name, locations.address FROM users_products
+INNER JOIN users
+ON users_products.users_id = users.id
+INNER JOIN products_stores
+ON users_products.productstores_id = products_stores.id
 INNER JOIN products
 ON products_stores.products_id = products.id
-ORDER BY stores_id;
-
-
--- SELECT * FROM users
--- INNER JOIN users_products
--- ON users.id = users_products.users_id
--- INNER JOIN products
--- ON users_products.products_id = products.id
--- LEFT JOIN products_stores
--- ON products.id = products_stores.products_id
--- # WHERE products.name LIKE '%piña%';
+INNER JOIN stores
+ON products_stores.stores_id = stores.id
+INNER JOIN locations
+ON stores.location_id = locations.id;

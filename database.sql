@@ -30,14 +30,14 @@ CREATE TABLE `locations` (
 
 CREATE TABLE `users_products` (
   `users_id` INT,
-  `products_id` INT,
-  PRIMARY KEY (`users_id`, `products_id`)
+  `productstores_id` INT,
+  PRIMARY KEY (`users_id`, `productstores_id`)
 );
 
 CREATE TABLE `products_stores` (
+  `id` INT PRIMARY KEY AUTO_INCREMENT,
   `products_id` INT,
   `stores_id` INT,
-  PRIMARY KEY (`products_id`, `stores_id`),
   `product_price` DECIMAL(5,2)
 );
 
@@ -51,13 +51,14 @@ ALTER TABLE `products_stores` ADD FOREIGN KEY (`products_id`) REFERENCES `produc
 
 ALTER TABLE `products_stores` ADD FOREIGN KEY (`stores_id`) REFERENCES `stores` (`id`);
 
-ALTER TABLE `users_products` ADD FOREIGN KEY (`products_id`) REFERENCES `products` (`id`);
+ALTER TABLE `users_products` ADD FOREIGN KEY (`productstores_id`) REFERENCES `products_stores` (`id`);
 
 INSERT INTO users (name)
 VALUES ('Airam');
 
 INSERT INTO products (name)
-VALUES('Leche ENTERA'),
+VALUES
+('Leche ENTERA'),
 ('Piña en lata'),
 ('Agua lanjarón'),
 ('Manzana roja');
@@ -87,3 +88,8 @@ VALUES
 (2,2, 2.50),
 (3,2, 0.75),
 (4,2, 0.49);
+
+INSERT INTO users_products (users_id, productstores_id)
+VALUES
+(1,5),
+(1,4);
