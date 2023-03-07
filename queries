@@ -1,5 +1,20 @@
-SELECT * FROM users
+/*
+SELECT products.name, companies_products.product_price, companies.company_name, locations.address FROM products
 INNER JOIN companies_products
-ON users.id = companies_products.user_id
+ON products.id = companies_products.products_id
+INNER JOIN companies
+ON companies_products.companies_id = companies.id
+INNER JOIN locations
+ON companies.location_id = locations.id
+WHERE products.name LIKE '%apple%'
+AND companies_products.availability = true
+ORDER BY companies_products.product_price;
+*/
+SELECT * FROM users
+INNER JOIN users_products
+ON users.id = users_products.users_id
+INNER JOIN companies_products
+ON users_products.products_id = companies_products.id
 INNER JOIN products
-ON companies_products.products_id = products.id;
+ON companies_products.products_id = products.id
+;
